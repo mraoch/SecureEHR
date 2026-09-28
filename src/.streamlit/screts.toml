@@ -1,7 +1,7 @@
-# .streamlit/secrets.toml
 [connections.postgresql]
-dialect = "postgresql"
+dialect = "postgresql+psycopg2"   # <-- Change this line
 host = "localhost"
-port = "5432"
-username = "postgres"
-password = 123
+port = 5432
+database = "dbfde"
+username = "fde"
+password = "dbfde"
