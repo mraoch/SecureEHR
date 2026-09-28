@@ -3,6 +3,5 @@
 dialect = "postgresql"
 host = "localhost"
 port = "5432"
-database = "your_database_name"
 username = "postgres"
-password = "your_password"
+password = 123
