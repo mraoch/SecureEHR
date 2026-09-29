@@ -2,6 +2,7 @@ import csv
 import pandas as pd
 import streamlit as st
 
+"""
 # 1. MUST BE FIRST: Configure the page layout
 st.set_page_config(
     page_title="Responsive Data App", layout="wide", initial_sidebar_state="expanded"
@@ -44,3 +45,64 @@ try:
     
 except FileNotFoundError:
     st.error(f"Could not find the file at: '{FILE_PATH}'. Please verify the path exists.")
+"""
+
+# 1. Read only the header row from your CSV file
+# (Replace 'your_file.csv' with your actual file path or uploaded file buffer)
+try:
+    df = pd.read_csv("your_file.csv", nrows=0)
+    headers_list = df.columns.tolist()
+except FileNotFoundError:
+    # Fallback placeholder for demonstration
+    headers_list = ["First Name", "Last Name", "Age", "Country", "Occupation"]
+
+# 2. Join the headers into a single comma-delimited text string
+comma_delimited_text = ", ".join(headers_list)
+
+# 3. Build a custom HTML table layout
+# Row 1 merges all cells to show the full comma-delimited text string.
+# Row 2 contains each individual header string inside its own individual cell.
+num_columns = len(headers_list)
+
+html_table = f"""
+<style>
+    .custom-table {{
+        width: 100%;
+        border-collapse: collapse;
+        font-family: sans-serif;
+        text-align: center;
+    }}
+    .custom-table th, .custom-table td {{
+        border: 1px solid #ddd;
+        padding: 12px;
+    }}
+    .merged-row {{
+        background-color: #f4f4f4;
+        font-weight: bold;
+        color: #333;
+    }}
+    .individual-row {{
+        background-color: #ffffff;
+        color: #555;
+    }}
+</style>
+
+<table class="custom-table">
+    <thead>
+        <!-- Row 1: Merged across all column cells -->
+        <tr class="merged-row">
+            <th colspan="{num_columns}">{comma_delimited_text}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Row 2: Each header in an individual cell -->
+        <tr class="individual-row">
+            {"".join(f"<td>{header}</td>" for header in headers_list)}
+        </tr>
+    </tbody>
+</table>
+"""
+
+# 4. Render the table in Streamlit
+st.title("CSV Header Display Matrix")
+st.markdown(html_table, unsafe_allow_html=True)
