@@ -1,4 +1,5 @@
 import csv
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 
@@ -9,7 +10,7 @@ st.set_page_config(
 )
 
 # Define the file path correctly using a raw string (r"...")
-FILE_PATH = r"D:\EHR\SecureEHR\data\data.csv"
+FILE_PATH = Path("D:\EHR\SecureEHR\data\data.csv")
 
 st.title("📋 Local CSV Viewer")
 
