@@ -6,10 +6,10 @@ import streamlit as st
     # 1. Read only the header row from your CSV file
     # (Replace 'your_file.csv' with your actual file path or uploaded file buffer)
 
-    st.title("📋 Local CSV Viewer")
+st.title("📋 Local CSV Viewer")
 
     # Define the file path correctly
-    FILE_PATH = Path("D:\EHR\SecureEHR\data\data.csv")
+FILE_PATH = Path("D:\EHR\SecureEHR\data\data.csv")
 
 try:
     # 2. Extract headers via the csv module (Fast & prints to terminal console)
@@ -21,10 +21,10 @@ try:
      df = pd.read_csv(FILE_PATH)
  
      # 4. Display the headers in the browser UI
-     st.subheader("CSV Headers:")
+st.subheader("CSV Headers:")
      
      # ⬇️ FIXED: Define the badges variable before using it in st.markdown
-     badges = "".join([
+badges = "".join([
          f'<span style="background-color: #f0f2f6; color: #31333F; padding: 6px 12px; '
          f'margin: 4px 6px; border-radius: 16px; font-weight: 500; '
          f'font-family: monospace; display: inline-block;">{h}</span>' 
@@ -32,16 +32,15 @@ try:
      ])
  
      # Render the badges horizontally as HTML
-     st.markdown(badges, unsafe_allow_html=True)
+st.markdown(badges, unsafe_allow_html=True)
      
      # Optional spacing
-     st.write("") 
+st.write("") 
  
      # 5. Display the full interactive dataframe in wide layout
-     st.subheader("Full Data:")
-     st.dataframe(df, use_container_width=True)
-     
- except FileNotFoundError:
+st.subheader("Full Data:")
+st.dataframe(df, use_container_width=True)
+     except FileNotFoundError:
      st.error(f"Could not find the file at: '{FILE_PATH}'. Please verify the path exists.")
 
 html_table = f"""
